@@ -1,0 +1,322 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 40 20% 98%;
+    --foreground: 200 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 25% 15%;
+
+    --primary: 174 60% 30%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 25% 93%;
+    --secondary-foreground: 200 25% 15%;
+
+    --muted: 40 15% 94%;
+    --muted-foreground: 200 10% 45%;
+
+    --accent: 174 40% 90%;
+    --accent-foreground: 174 60% 20%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 15% 88%;
+    --input: 200 15% 88%;
+    --ring: 174 60% 30%;
+
+    --radius: 0.625rem;
+
+    --sidebar-background: 174 40% 96%;
+    --sidebar-foreground: 200 25% 15%;
+    --sidebar-primary: 174 60% 30%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 174 40% 90%;
+    --sidebar-accent-foreground: 174 60% 20%;
+    --sidebar-border: 200 15% 88%;
+    --sidebar-ring: 174 60% 30%;
+
+    --success: 152 55% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --tag: 174 50% 92%;
+    --tag-foreground: 174 60% 25%;
+  }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  pre {
+    @apply bg-muted p-4 rounded-md font-mono text-sm overflow-x-auto my-3 border border-border;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.5;
+  }
+
+  code {
+    @apply bg-muted px-1.5 py-0.5 rounded font-mono text-sm border border-border/50;
+  }
+
+  pre code {
+    @apply p-0 bg-transparent border-none;
+  }
+}
+
+@layer utilities {
+  @media print {
+    @page {
+      size: A4;
+      margin: 1.5cm;
+    }
+    
+    body {
+      visibility: hidden;
+      background: white !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .printable-exam, .printable-exam * {
+      visibility: visible !important;
+    }
+
+    .printable-exam {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: block !important;
+      box-sizing: border-box;
+      font-size: var(--exam-font-size, 12pt) !important;
+    }
+  }
+}
+
+/* ============================================
+   AUTH PAGES — Login & Register
+   ============================================ */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, hsl(174 60% 8%), hsl(200 40% 12%) 50%, hsl(174 50% 15%));
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, hsl(174 60% 30% / 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, hsl(200 60% 40% / 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: hsl(0 0% 100% / 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid hsl(0 0% 100% / 0.12);
+  border-radius: 1.25rem;
+  padding: 2.5rem 2rem;
+  box-shadow:
+    0 25px 50px hsl(0 0% 0% / 0.4),
+    0 0 0 1px hsl(174 60% 50% / 0.05) inset;
+  animation: auth-card-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes auth-card-in {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.auth-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-logo-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, hsl(174 60% 35%), hsl(174 60% 25%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin: 0 auto 0.875rem;
+  box-shadow: 0 8px 20px hsl(174 60% 25% / 0.5);
+}
+
+.auth-logo-title {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: hsl(0 0% 100%);
+  margin: 0 0 0.25rem;
+  letter-spacing: -0.02em;
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+
+.auth-logo-subtitle {
+  font-size: 0.8125rem;
+  color: hsl(0 0% 100% / 0.5);
+  margin: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.auth-field label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: hsl(0 0% 100% / 0.75);
+  letter-spacing: 0.01em;
+}
+
+.auth-field input {
+  width: 100%;
+  height: 2.625rem;
+  padding: 0 0.875rem;
+  background: hsl(0 0% 100% / 0.07);
+  border: 1px solid hsl(0 0% 100% / 0.12);
+  border-radius: 0.625rem;
+  color: hsl(0 0% 100%);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.auth-field input::placeholder {
+  color: hsl(0 0% 100% / 0.3);
+}
+
+.auth-field input:focus {
+  border-color: hsl(174 60% 50%);
+  background: hsl(0 0% 100% / 0.1);
+  box-shadow: 0 0 0 3px hsl(174 60% 40% / 0.2);
+}
+
+.auth-pass-wrap {
+  position: relative;
+}
+
+.auth-pass-wrap input {
+  padding-right: 2.75rem;
+}
+
+.auth-pass-toggle {
+  position: absolute;
+  right: 0.625rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: hsl(0 0% 100% / 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+  transition: color 0.2s;
+}
+
+.auth-pass-toggle:hover {
+  color: hsl(0 0% 100% / 0.8);
+}
+
+.auth-btn {
+  width: 100%;
+  height: 2.75rem;
+  background: linear-gradient(135deg, hsl(174 60% 35%), hsl(174 60% 28%));
+  color: white;
+  border: none;
+  border-radius: 0.625rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px hsl(174 60% 25% / 0.4);
+  margin-top: 0.25rem;
+}
+
+.auth-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, hsl(174 60% 40%), hsl(174 60% 32%));
+  box-shadow: 0 6px 18px hsl(174 60% 25% / 0.5);
+  transform: translateY(-1px);
+}
+
+.auth-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 0.8125rem;
+  color: hsl(0 0% 100% / 0.5);
+  margin: 0;
+}
+
+.auth-switch a {
+  color: hsl(174 60% 65%);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.auth-switch a:hover {
+  color: hsl(174 60% 75%);
+  text-decoration: underline;
+}
+
+.spin {
+  animation: spin-anim 1s linear infinite;
+}
+@keyframes spin-anim {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
